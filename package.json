@@ -1,0 +1,20 @@
+{
+  "name": "sinon-codemod",
+  "version": "1.0.0",
+  "description": "Sinon codemod scripts for JSCodeshift",
+  "repository": {
+    "url": "git@github.com:hurrymaplelad/sinon-codemod.git",
+    "type": "git"
+  },
+  "author": "Adam Hull <adam@hmlad.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^17.0.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "jscodeshift": "^0.3.30"
+  }
+}
