@@ -38,3 +38,5 @@ sinon.stub(obj, 'someMethod').callsFake(myFunc);
 
 // sandboxed variations
 this._sandbox.stub(obj, 'foo').callsFake(() => {});
+
+query = this._sandbox.stub(someobj.foo, 'query').callsFake(aFunction.bind(null, 'then', arg1));

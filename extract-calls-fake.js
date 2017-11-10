@@ -8,7 +8,7 @@ function transformer(file, api) {
     // sinon.stub(obj, 'foo', function () { return 'boom'; })
     // sinon.stub(obj, 'foo', () => {})
     // sinon.stub(obj, 'foo', someFunc)
-    if ( [ 'FunctionExpression', 'ArrowFunctionExpression', 'Identifier' ].includes(fakeImplementationNode.type) ) {
+    if ( [ 'FunctionExpression', 'ArrowFunctionExpression', 'Identifier', 'CallExpression' ].includes(fakeImplementationNode.type) ) {
       return j.memberExpression(
         callNode,
         j.callExpression(
