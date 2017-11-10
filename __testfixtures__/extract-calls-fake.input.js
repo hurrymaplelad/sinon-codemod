@@ -38,5 +38,7 @@ sinon.stub(obj, 'prop', {
   }
 });
 
-// sandboxed
+sinon.stub(obj, 'someMethod', myFunc);
+
+// sandboxed variations
 this._sandbox.stub(obj, 'foo', () => {});

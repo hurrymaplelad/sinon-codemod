@@ -34,5 +34,7 @@ sinon.stub(obj, 'prop').set(function(val) {
   obj.example = val;
 });
 
-// sandboxed
+sinon.stub(obj, 'someMethod').callsFake(myFunc);
+
+// sandboxed variations
 this._sandbox.stub(obj, 'foo').callsFake(() => {});
