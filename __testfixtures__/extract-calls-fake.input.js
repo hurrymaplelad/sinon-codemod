@@ -37,3 +37,6 @@ sinon.stub(obj, 'prop', {
     obj.example = val;
   }
 });
+
+// sandboxed
+this._sandbox.stub(obj, 'foo', () => {});
