@@ -9,10 +9,33 @@
   "author": "Adam Hull <adam@hmlad.com>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^17.0.3"
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "jest": "^17.0.3",
+    "prettier": "^1.11.1"
   },
   "scripts": {
-    "test": "jest"
+    "test": "yarn run lint && jest",
+    "fix": "yarn run eslint --fix & yarn run prettier --write & wait",
+    "lint": "yarn run eslint & yarn run prettier -l & wait",
+    "prettier": "prettier README.md package.json",
+    "eslint": "eslint ."
+  },
+  "prettier": {
+    "singleQuote": true,
+    "bracketSpacing": false
+  },
+  "eslintConfig": {
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "env": {
+      "node": true,
+      "es6": true,
+      "mocha": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017
+    }
   },
   "dependencies": {
     "jscodeshift": "^0.3.30"

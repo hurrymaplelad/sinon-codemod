@@ -1,11 +1,7 @@
 const sinon = require("sinon");
 
-let obj = {
-  example: 'oldValue',
-  prop: 'foo',
-  foo: function () {
-  }
-};
+const obj = {foo: () => {}};
+
 // function
 sinon.stub(obj, 'foo').callsFake(function () {
   return 'boom';
@@ -34,9 +30,12 @@ sinon.stub(obj, 'prop').set(function(val) {
   obj.example = val;
 });
 
+function myFunc() {}
 sinon.stub(obj, 'someMethod').callsFake(myFunc);
 
 // sandboxed variations
 this._sandbox.stub(obj, 'foo').callsFake(() => {});
 
-query = this._sandbox.stub(someobj.foo, 'query').callsFake(aFunction.bind(null, 'then', arg1));
+const someobj = {foo: {query: () => {}}};
+let arg1, aFunction;
+const query = this._sandbox.stub(someobj.foo, 'query').callsFake(aFunction.bind(null, 'then', arg1));

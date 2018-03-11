@@ -8,15 +8,19 @@ function transformer(file, api) {
     // sinon.stub(obj, 'foo', function () { return 'boom'; })
     // sinon.stub(obj, 'foo', () => {})
     // sinon.stub(obj, 'foo', someFunc)
-    if ( [ 'FunctionExpression', 'ArrowFunctionExpression', 'Identifier', 'CallExpression' ].includes(fakeImplementationNode.type) ) {
+    if (
+      [
+        'FunctionExpression',
+        'ArrowFunctionExpression',
+        'Identifier',
+        'CallExpression'
+      ].includes(fakeImplementationNode.type)
+    ) {
       return j.memberExpression(
         callNode,
-        j.callExpression(
-          j.identifier('callsFake'),
-          [fakeImplementationNode]
-        )
+        j.callExpression(j.identifier('callsFake'), [fakeImplementationNode])
       );
-    } else if (fakeImplementationNode.type === "ObjectExpression") {
+    } else if (fakeImplementationNode.type === 'ObjectExpression') {
       // getter/setter
       const properties = fakeImplementationNode.properties;
       if (!properties) {
@@ -24,45 +28,40 @@ function transformer(file, api) {
       }
       // { get: fake, set: fake } pattern is not supported yet.
       if (properties.length > 1) {
-        throw new Error("NOT support");
+        throw new Error('NOT support');
       }
       const property = properties[0];
-      if (property.kind !== "init" || !property.key) {
+      if (property.kind !== 'init' || !property.key) {
         return;
       }
-      if (property.key.name !== "get" && property.key.name !== "set") {
+      if (property.key.name !== 'get' && property.key.name !== 'set') {
         return; // this is not getter or setter
       }
-      const isGetter = property.key.name === "get";
+      const isGetter = property.key.name === 'get';
       // => stub(obj, "prop").get(fn)
       if (isGetter) {
         return j.memberExpression(
           callNode,
-          j.callExpression(
-            j.identifier('get'),
-            [property.value]
-          )
+          j.callExpression(j.identifier('get'), [property.value])
         );
       } else {
         // => stub(obj, "prop").set(fn)
         return j.memberExpression(
           callNode,
-          j.callExpression(
-            j.identifier('set'),
-            [property.value]
-          )
+          j.callExpression(j.identifier('set'), [property.value])
         );
       }
     }
   };
 
-    source.find(j.CallExpression, {
+  source
+    .find(j.CallExpression, {
       callee: {
         object: {
-          name: 'sinon',
+          name: 'sinon'
         },
         property: {
-          name: 'stub',
+          name: 'stub'
         }
       },
       arguments: {
@@ -71,7 +70,8 @@ function transformer(file, api) {
     })
     .replaceWith(replacer);
 
-    return source.find(j.CallExpression, {
+  return source
+    .find(j.CallExpression, {
       callee: {
         type: 'MemberExpression',
         object: {
@@ -85,7 +85,7 @@ function transformer(file, api) {
           }
         },
         property: {
-          name: 'stub',
+          name: 'stub'
         }
       },
       arguments: {
