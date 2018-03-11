@@ -33,3 +33,10 @@ sinon.stub(obj, 'prop').set(setterFn);
 sinon.stub(obj, 'prop').set(function(val) {
   obj.example = val;
 });
+
+sinon.stub(obj, 'someMethod').callsFake(myFunc);
+
+// sandboxed variations
+this._sandbox.stub(obj, 'foo').callsFake(() => {});
+
+query = this._sandbox.stub(someobj.foo, 'query').callsFake(aFunction.bind(null, 'then', arg1));

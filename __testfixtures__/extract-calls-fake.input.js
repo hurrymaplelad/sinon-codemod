@@ -37,3 +37,10 @@ sinon.stub(obj, 'prop', {
     obj.example = val;
   }
 });
+
+sinon.stub(obj, 'someMethod', myFunc);
+
+// sandboxed variations
+this._sandbox.stub(obj, 'foo', () => {});
+
+query = this._sandbox.stub(someobj.foo, 'query', aFunction.bind(null, 'then', arg1));
