@@ -1,6 +1,6 @@
 {
   "name": "sinon-codemod",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Sinon codemod scripts for JSCodeshift",
   "repository": {
     "url": "git@github.com:hurrymaplelad/sinon-codemod.git",
@@ -27,7 +27,10 @@
     "bracketSpacing": false
   },
   "eslintConfig": {
-    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
     "env": {
       "node": true,
       "es6": true,
