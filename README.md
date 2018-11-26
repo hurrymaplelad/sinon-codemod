@@ -26,3 +26,21 @@ Converts 3-argument calls to `sinon.stub(x,y,z)` into `sinon.stub(x,y).callsFake
 ```sh
 jscodeshift -t sinon-codemod/extract-calls-fake.js <path>
 ```
+
+#### `migrate-to-v5`
+
+Removes `sandbox` variable declaration
+
+Removes `sinon.sandbox.create();`
+
+Replaces `sandbox.restore()` with `sinon.restore()`
+
+Replaces `sandbox.stub()` with `sinon.stub()`
+
+Replaces `sandbox.spy()` with `sinon.spy()`
+
+Replaces `sandbox.mock()` with `sinon.mock()`
+
+```sh
+jscodeshift -t sinon-codemod/migrate-to-v5.js <path>
+```
