@@ -21,7 +21,7 @@ This repository contains a collection of codemod scripts based for use with
 
 #### `extract-calls-fake`
 
-Converts 3-argument calls to `sinon.stub(x,y,z)` into `sinon.stub(x,y).callsFake(z).
+Converts 3-argument calls to `sinon.stub(x,y,z)` into `sinon.stub(x,y).callsFake(z)`.
 
 ```sh
 jscodeshift -t sinon-codemod/extract-calls-fake.js <path>
